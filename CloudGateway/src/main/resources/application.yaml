@@ -1,0 +1,44 @@
+server:
+  port: 9090
+spring:
+  application:
+    name: API-GATEWAY
+  config:
+    import: configserver:http://localhost:9296
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: COMPANY-SERVICE
+            uri: lb://COMPANY-SERVICE
+            predicates:
+              - Path=/companies/**
+          - id: PRODUCT-SERVICE
+            uri: lb://PRODUCT-SERVICE
+            predicates:
+              - Path=/products/**
+          - id: ORDER-SERVICE
+            uri: lb://ORDER-SERVICE
+            predicates:
+              - Path=/orders/**
+          - id: PAYMENT-SERVICE
+            uri: lb://PAYMENT-SERVICE
+            predicates:
+              - Path=/payment/**
+          - id: CATEGORY-SERVICE
+            uri: lb://CATEGORY-SERVICE
+            predicates:
+              - Path=/categories/**
+          - id: REVIEW-PRODUCT-SERVICE
+            uri: lb://REVIEW-PRODUCT-SERVICE
+            predicates:
+              - Path=/product-reviews/**
+          - id: REVIEW-COMPANY-SERVICE
+            uri: lb://REVIEW-COMPANY-SERVICE
+            predicates:
+              - Path=/company-reviews/**
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
