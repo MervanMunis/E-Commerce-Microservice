@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # E-Commerce Project
 =======
 # E-Commerce-Microservice
